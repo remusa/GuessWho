@@ -5,15 +5,46 @@
  */
 package view;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+
 /**
  *
  * @author rms
  */
 public class VwMain extends javax.swing.JFrame {
-
+    
+    private String selectedPerson = "";
+    private final String[] people = {
+        "Person 1", "Person 2", "Person 3", "Person 4", "Person 5",
+        "Person 6", "Person 7", "Person 8", "Person 9", "Person 10"
+    };
+    
     /** Creates new form VwMain */
     public VwMain() {
         initComponents();
+    }
+    
+    private void selectPerson(JPanel pn, String selected) {
+        ArrayList<String> people2 = new ArrayList<>();
+        
+        people2.addAll(Arrays.asList(people));
+        
+        pn.setBorder(BorderFactory.createLineBorder(Color.red));
+        selectedPerson = selected;
+        System.out.println(selected);
+        
+        JPanel panel;
+        
+        for (int i = 0; i < 10; i++) {
+            if (selectedPerson.equals(people2.get(i))) {
+            } else {
+                 people2.get(i);
+            }
+        }
     }
 
     /** This method is called from within the constructor to
@@ -41,14 +72,13 @@ public class VwMain extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         tfPlayerCharacter = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adivina Quién");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Adivina Quién");
@@ -237,32 +267,24 @@ public class VwMain extends javax.swing.JFrame {
 
         pnOptions.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("Iniciar");
+        jButton1.setText("Seleccionar");
 
         jLabel2.setText("Jugador: ");
-
-        jLabel3.setText("IA:");
 
         javax.swing.GroupLayout pnOptionsLayout = new javax.swing.GroupLayout(pnOptions);
         pnOptions.setLayout(pnOptionsLayout);
         pnOptionsLayout.setHorizontalGroup(
             pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnOptionsLayout.createSequentialGroup()
-                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnOptionsLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButton1)
-                        .addGap(0, 48, Short.MAX_VALUE))
-                    .addGroup(pnOptionsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfPlayerCharacter)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))))
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfPlayerCharacter, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOptionsLayout.createSequentialGroup()
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(43, 43, 43))
         );
         pnOptionsLayout.setVerticalGroup(
             pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,27 +294,23 @@ public class VwMain extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(tfPlayerCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
                 .addComponent(jButton1)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 606, Short.MAX_VALUE)
+            .addGap(0, 639, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(pnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(pnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(pnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(pnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -324,8 +342,8 @@ public class VwMain extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(pnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(pnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(pnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(pnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -378,44 +396,44 @@ public class VwMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pnPerson2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson2MouseClicked
-        System.out.println("Person 1");
-    }//GEN-LAST:event_pnPerson2MouseClicked
-
     private void pnPerson1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson1MouseClicked
-        System.out.println("Person 2");
+        selectPerson(pnPerson1, "Person 1");
     }//GEN-LAST:event_pnPerson1MouseClicked
 
+    private void pnPerson2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson2MouseClicked
+        selectPerson(pnPerson2, "Person 2");
+    }//GEN-LAST:event_pnPerson2MouseClicked
+
     private void pnPerson3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson3MouseClicked
-        System.out.println("Person 3");
+        selectPerson(pnPerson3, "Person 3");
     }//GEN-LAST:event_pnPerson3MouseClicked
 
     private void pnPerson4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson4MouseClicked
-        System.out.println("Person 4");
+        selectPerson(pnPerson4, "Person 4");
     }//GEN-LAST:event_pnPerson4MouseClicked
 
     private void pnPerson5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson5MouseClicked
-        System.out.println("Person 5");
+        selectPerson(pnPerson5, "Person 5");
     }//GEN-LAST:event_pnPerson5MouseClicked
 
     private void pnPerson6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson6MouseClicked
-        System.out.println("Person 6");
+        selectPerson(pnPerson6, "Person 6");
     }//GEN-LAST:event_pnPerson6MouseClicked
 
     private void pnPerson7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson7MouseClicked
-        System.out.println("Person 7");
+        selectPerson(pnPerson7, "Person 7");
     }//GEN-LAST:event_pnPerson7MouseClicked
 
     private void pnPerson8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson8MouseClicked
-        System.out.println("Person 8");
+        selectPerson(pnPerson8, "Person 8");
     }//GEN-LAST:event_pnPerson8MouseClicked
 
     private void pnPerson9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson9MouseClicked
-        System.out.println("Person 9");
+        selectPerson(pnPerson9, "Person 9");
     }//GEN-LAST:event_pnPerson9MouseClicked
 
     private void pnPerson10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson10MouseClicked
-        System.out.println("Person 10");
+        selectPerson(pnPerson10, "Person 10");
     }//GEN-LAST:event_pnPerson10MouseClicked
 
     /**
@@ -457,12 +475,10 @@ public class VwMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel pnOptions;
     private javax.swing.JPanel pnPerson1;
     private javax.swing.JPanel pnPerson10;
