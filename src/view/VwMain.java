@@ -5,45 +5,61 @@
  */
 package view;
 
-import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import model.Person;
 
 /**
  *
  * @author rms
  */
 public class VwMain extends javax.swing.JFrame {
+
+//    private Person person1 = new Person(1, "Juan", "Hombre", "", "Corto", "Cafés", "Negro", true, true, true);
+    private final Person person1 = new Person(1, "Rodo", "Hombre");
+    private final Person person2 = new Person(2, "Core", "Mujer");
+    private final Person person3 = new Person(3, "Héctor", "Hombre");
+    private final Person person4 = new Person(4, "Lupita", "Mujer");
+    private final Person person5 = new Person(5, "Diego", "Hombre");
+    private final Person person6 = new Person(6, "Miguel", "Hombre");
+    private final Person person7 = new Person(7, "Luis", "Hombre");
+    private final Person person8 = new Person(8, "Cecilia", "Mujer");
+    private final Person person9 = new Person(9, "Nacho", "Hombre");
+    private final Person person10 = new Person(10, "Gris", "Mujer");
     
-    private String selectedPerson = "";
-    private final String[] people = {
-        "Person 1", "Person 2", "Person 3", "Person 4", "Person 5",
-        "Person 6", "Person 7", "Person 8", "Person 9", "Person 10"
-    };
+    public static String answer1Sex = "";
     
+    private final String[] peopleComboBox = {
+        person1.getName(), person2.getName(), person3.getName(), person4.getName(), person5.getName(),
+        person6.getName(), person7.getName(), person8.getName(), person9.getName(), person10.getName(),};
+    
+    private List<String> people2 = Arrays.asList(peopleComboBox);
+
     /** Creates new form VwMain */
     public VwMain() {
         initComponents();
     }
     
-    private void selectPerson(JPanel pn, String selected) {
-        ArrayList<String> people2 = new ArrayList<>();
-        
-        people2.addAll(Arrays.asList(people));
-        
-        pn.setBorder(BorderFactory.createLineBorder(Color.red));
-        selectedPerson = selected;
-        System.out.println(selected);
-        
-        JPanel panel;
-        
-        for (int i = 0; i < 10; i++) {
-            if (selectedPerson.equals(people2.get(i))) {
-            } else {
-                 people2.get(i);
+    private void selectPerson(Person p) {
+        tfPlayerCharacter.setText(p.getName());
+    }
+    
+    private void disable(Object... objs) {
+        try {
+            for (Object obj : objs) {
+                if (obj instanceof JButton) {
+                    JButton f = (JButton) obj;
+                    f.setEnabled(false);
+                }
+                if (obj instanceof JTextField) {
+                    JTextField f = (JTextField) obj;
+                    f.setEnabled(false);
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -58,20 +74,27 @@ public class VwMain extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        pnPerson1 = new javax.swing.JPanel();
-        pnPerson2 = new javax.swing.JPanel();
-        pnPerson3 = new javax.swing.JPanel();
-        pnPerson4 = new javax.swing.JPanel();
-        pnPerson5 = new javax.swing.JPanel();
-        pnPerson6 = new javax.swing.JPanel();
-        pnPerson7 = new javax.swing.JPanel();
-        pnPerson8 = new javax.swing.JPanel();
-        pnPerson9 = new javax.swing.JPanel();
-        pnPerson10 = new javax.swing.JPanel();
+        pnQuestions = new javax.swing.JPanel();
+        btnQuestionSex = new javax.swing.JButton();
+        tfQSex = new javax.swing.JTextField();
+        pnCharacters = new javax.swing.JPanel();
+        btnPerson1 = new javax.swing.JButton();
+        btnPerson2 = new javax.swing.JButton();
+        btnPerson3 = new javax.swing.JButton();
+        btnPerson4 = new javax.swing.JButton();
+        btnPerson5 = new javax.swing.JButton();
+        btnPerson6 = new javax.swing.JButton();
+        btnPerson7 = new javax.swing.JButton();
+        btnPerson8 = new javax.swing.JButton();
+        btnPerson9 = new javax.swing.JButton();
+        btnPerson10 = new javax.swing.JButton();
         pnOptions = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         tfPlayerCharacter = new javax.swing.JTextField();
+        cbAnswer = new javax.swing.JComboBox<>();
+        btnSelect = new javax.swing.JButton();
+        btnGuess = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -79,197 +102,244 @@ public class VwMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adivina Quién");
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setText("Adivina Quién");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        pnPerson1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson1MouseClicked(evt);
+        pnQuestions.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnQuestionSex.setText("Sexo");
+        btnQuestionSex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestionSexActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson1Layout = new javax.swing.GroupLayout(pnPerson1);
-        pnPerson1.setLayout(pnPerson1Layout);
-        pnPerson1Layout.setHorizontalGroup(
-            pnPerson1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnQuestionsLayout = new javax.swing.GroupLayout(pnQuestions);
+        pnQuestions.setLayout(pnQuestionsLayout);
+        pnQuestionsLayout.setHorizontalGroup(
+            pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnQuestionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnQuestionSex, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfQSex, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        pnPerson1Layout.setVerticalGroup(
-            pnPerson1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        pnQuestionsLayout.setVerticalGroup(
+            pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnQuestionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestionSex)
+                    .addComponent(tfQSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnPerson2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson2MouseClicked(evt);
+        pnCharacters.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnPerson1.setText("Rodo");
+        btnPerson1.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson1.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson1.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson2Layout = new javax.swing.GroupLayout(pnPerson2);
-        pnPerson2.setLayout(pnPerson2Layout);
-        pnPerson2Layout.setHorizontalGroup(
-            pnPerson2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        pnPerson2Layout.setVerticalGroup(
-            pnPerson2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pnPerson3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson3MouseClicked(evt);
+        btnPerson2.setText("Core");
+        btnPerson2.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson2.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson2.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson2ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson3Layout = new javax.swing.GroupLayout(pnPerson3);
-        pnPerson3.setLayout(pnPerson3Layout);
-        pnPerson3Layout.setHorizontalGroup(
-            pnPerson3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        pnPerson3Layout.setVerticalGroup(
-            pnPerson3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pnPerson4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson4MouseClicked(evt);
+        btnPerson3.setText("Héctor");
+        btnPerson3.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson3.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson3.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson3ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson4Layout = new javax.swing.GroupLayout(pnPerson4);
-        pnPerson4.setLayout(pnPerson4Layout);
-        pnPerson4Layout.setHorizontalGroup(
-            pnPerson4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        pnPerson4Layout.setVerticalGroup(
-            pnPerson4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pnPerson5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson5MouseClicked(evt);
+        btnPerson4.setText("Lupita");
+        btnPerson4.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson4.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson4.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson4ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson5Layout = new javax.swing.GroupLayout(pnPerson5);
-        pnPerson5.setLayout(pnPerson5Layout);
-        pnPerson5Layout.setHorizontalGroup(
-            pnPerson5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        pnPerson5Layout.setVerticalGroup(
-            pnPerson5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pnPerson6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson6MouseClicked(evt);
+        btnPerson5.setText("Diego");
+        btnPerson5.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson5.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson5.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson5ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson6Layout = new javax.swing.GroupLayout(pnPerson6);
-        pnPerson6.setLayout(pnPerson6Layout);
-        pnPerson6Layout.setHorizontalGroup(
-            pnPerson6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        pnPerson6Layout.setVerticalGroup(
-            pnPerson6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pnPerson7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson7MouseClicked(evt);
+        btnPerson6.setText("Miguel");
+        btnPerson6.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson6.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson6.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson6ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson7Layout = new javax.swing.GroupLayout(pnPerson7);
-        pnPerson7.setLayout(pnPerson7Layout);
-        pnPerson7Layout.setHorizontalGroup(
-            pnPerson7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        pnPerson7Layout.setVerticalGroup(
-            pnPerson7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pnPerson8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson8MouseClicked(evt);
+        btnPerson7.setText("Luis");
+        btnPerson7.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson7.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson7.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson7ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson8Layout = new javax.swing.GroupLayout(pnPerson8);
-        pnPerson8.setLayout(pnPerson8Layout);
-        pnPerson8Layout.setHorizontalGroup(
-            pnPerson8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        pnPerson8Layout.setVerticalGroup(
-            pnPerson8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pnPerson9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson9MouseClicked(evt);
+        btnPerson8.setText("Cecilia");
+        btnPerson8.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson8.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson8.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson8ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson9Layout = new javax.swing.GroupLayout(pnPerson9);
-        pnPerson9.setLayout(pnPerson9Layout);
-        pnPerson9Layout.setHorizontalGroup(
-            pnPerson9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        pnPerson9Layout.setVerticalGroup(
-            pnPerson9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pnPerson10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnPerson10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnPerson10MouseClicked(evt);
+        btnPerson9.setText("Nacho");
+        btnPerson9.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson9.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson9.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson9ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnPerson10Layout = new javax.swing.GroupLayout(pnPerson10);
-        pnPerson10.setLayout(pnPerson10Layout);
-        pnPerson10Layout.setHorizontalGroup(
-            pnPerson10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        btnPerson10.setText("Gris");
+        btnPerson10.setMaximumSize(new java.awt.Dimension(75, 75));
+        btnPerson10.setMinimumSize(new java.awt.Dimension(75, 75));
+        btnPerson10.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnPerson10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerson10ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnCharactersLayout = new javax.swing.GroupLayout(pnCharacters);
+        pnCharacters.setLayout(pnCharactersLayout);
+        pnCharactersLayout.setHorizontalGroup(
+            pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnCharactersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnCharactersLayout.createSequentialGroup()
+                        .addComponent(btnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnCharactersLayout.createSequentialGroup()
+                        .addComponent(btnPerson5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPerson6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPerson7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPerson8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnCharactersLayout.createSequentialGroup()
+                        .addComponent(btnPerson9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPerson10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnPerson10Layout.setVerticalGroup(
-            pnPerson10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        pnCharactersLayout.setVerticalGroup(
+            pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnCharactersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPerson5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPerson9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnCharacters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnQuestions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnCharacters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnQuestions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pnOptions.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("Seleccionar");
+        jLabel2.setText("Personaje:");
 
-        jLabel2.setText("Jugador: ");
+        jLabel3.setText("Respuesta:");
+
+        cbAnswer.setModel(new javax.swing.DefaultComboBoxModel(peopleComboBox));
+
+        btnSelect.setText("Seleccionar personaje");
+        btnSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectActionPerformed(evt);
+            }
+        });
+
+        btnGuess.setText("Adivinar");
+        btnGuess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuessActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnOptionsLayout = new javax.swing.GroupLayout(pnOptions);
         pnOptions.setLayout(pnOptionsLayout);
@@ -277,87 +347,33 @@ public class VwMain extends javax.swing.JFrame {
             pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfPlayerCharacter)
+                    .addComponent(cbAnswer, 0, 150, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfPlayerCharacter, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOptionsLayout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(43, 43, 43))
+                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnOptionsLayout.setVerticalGroup(
             pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnOptionsLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfPlayerCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfPlayerCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSelect)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(252, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(pnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(pnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(pnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(pnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(pnPerson5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(pnPerson6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(pnPerson7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(pnPerson9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(pnPerson10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(pnPerson8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(pnOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(pnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pnPerson5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnPerson6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnPerson7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnPerson8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pnPerson9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnPerson10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(pnOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap()))
+                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(btnGuess))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Ayuda");
@@ -374,21 +390,24 @@ public class VwMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(jLabel1)))
+                    .addComponent(pnOptions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(275, 275, 275)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -396,45 +415,67 @@ public class VwMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pnPerson1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson1MouseClicked
-        selectPerson(pnPerson1, "Person 1");
-    }//GEN-LAST:event_pnPerson1MouseClicked
+    private void btnPerson1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson1ActionPerformed
+        selectPerson(person1);
+    }//GEN-LAST:event_btnPerson1ActionPerformed
 
-    private void pnPerson2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson2MouseClicked
-        selectPerson(pnPerson2, "Person 2");
-    }//GEN-LAST:event_pnPerson2MouseClicked
+    private void btnPerson2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson2ActionPerformed
+        selectPerson(person2);
+    }//GEN-LAST:event_btnPerson2ActionPerformed
 
-    private void pnPerson3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson3MouseClicked
-        selectPerson(pnPerson3, "Person 3");
-    }//GEN-LAST:event_pnPerson3MouseClicked
+    private void btnPerson3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson3ActionPerformed
+        selectPerson(person3);
+    }//GEN-LAST:event_btnPerson3ActionPerformed
 
-    private void pnPerson4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson4MouseClicked
-        selectPerson(pnPerson4, "Person 4");
-    }//GEN-LAST:event_pnPerson4MouseClicked
+    private void btnPerson4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson4ActionPerformed
+        selectPerson(person4);
+    }//GEN-LAST:event_btnPerson4ActionPerformed
 
-    private void pnPerson5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson5MouseClicked
-        selectPerson(pnPerson5, "Person 5");
-    }//GEN-LAST:event_pnPerson5MouseClicked
+    private void btnPerson5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson5ActionPerformed
+        selectPerson(person5);
+    }//GEN-LAST:event_btnPerson5ActionPerformed
 
-    private void pnPerson6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson6MouseClicked
-        selectPerson(pnPerson6, "Person 6");
-    }//GEN-LAST:event_pnPerson6MouseClicked
+    private void btnPerson6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson6ActionPerformed
+        selectPerson(person6);
+    }//GEN-LAST:event_btnPerson6ActionPerformed
 
-    private void pnPerson7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson7MouseClicked
-        selectPerson(pnPerson7, "Person 7");
-    }//GEN-LAST:event_pnPerson7MouseClicked
+    private void btnPerson7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson7ActionPerformed
+        selectPerson(person7);
+    }//GEN-LAST:event_btnPerson7ActionPerformed
 
-    private void pnPerson8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson8MouseClicked
-        selectPerson(pnPerson8, "Person 8");
-    }//GEN-LAST:event_pnPerson8MouseClicked
+    private void btnPerson8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson8ActionPerformed
+        selectPerson(person8);
+    }//GEN-LAST:event_btnPerson8ActionPerformed
 
-    private void pnPerson9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson9MouseClicked
-        selectPerson(pnPerson9, "Person 9");
-    }//GEN-LAST:event_pnPerson9MouseClicked
+    private void btnPerson9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson9ActionPerformed
+        selectPerson(person9);
+    }//GEN-LAST:event_btnPerson9ActionPerformed
 
-    private void pnPerson10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnPerson10MouseClicked
-        selectPerson(pnPerson10, "Person 10");
-    }//GEN-LAST:event_pnPerson10MouseClicked
+    private void btnPerson10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson10ActionPerformed
+        selectPerson(person10);
+    }//GEN-LAST:event_btnPerson10ActionPerformed
+
+    private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
+        disable(btnPerson1, btnPerson2, btnPerson3, btnPerson4, btnPerson5,
+                btnPerson6, btnPerson7, btnPerson8, btnPerson9, btnPerson10,
+                tfPlayerCharacter);
+    }//GEN-LAST:event_btnSelectActionPerformed
+
+    private void btnGuessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuessActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuessActionPerformed
+
+    private void btnQuestionSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestionSexActionPerformed
+        new VwQSex().setVisible(true);
+    }//GEN-LAST:event_btnQuestionSexActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        tfQSex.setText(answer1Sex);
+        
+        if (rootPaneCheckingEnabled) {
+            
+        }
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -472,24 +513,31 @@ public class VwMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuess;
+    private javax.swing.JButton btnPerson1;
+    private javax.swing.JButton btnPerson10;
+    private javax.swing.JButton btnPerson2;
+    private javax.swing.JButton btnPerson3;
+    private javax.swing.JButton btnPerson4;
+    private javax.swing.JButton btnPerson5;
+    private javax.swing.JButton btnPerson6;
+    private javax.swing.JButton btnPerson7;
+    private javax.swing.JButton btnPerson8;
+    private javax.swing.JButton btnPerson9;
+    private javax.swing.JButton btnQuestionSex;
+    private javax.swing.JButton btnSelect;
+    private javax.swing.JComboBox<String> cbAnswer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel pnCharacters;
     private javax.swing.JPanel pnOptions;
-    private javax.swing.JPanel pnPerson1;
-    private javax.swing.JPanel pnPerson10;
-    private javax.swing.JPanel pnPerson2;
-    private javax.swing.JPanel pnPerson3;
-    private javax.swing.JPanel pnPerson4;
-    private javax.swing.JPanel pnPerson5;
-    private javax.swing.JPanel pnPerson6;
-    private javax.swing.JPanel pnPerson7;
-    private javax.swing.JPanel pnPerson8;
-    private javax.swing.JPanel pnPerson9;
+    private javax.swing.JPanel pnQuestions;
     private javax.swing.JTextField tfPlayerCharacter;
+    private javax.swing.JTextField tfQSex;
     // End of variables declaration//GEN-END:variables
 }
