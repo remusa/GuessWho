@@ -5,7 +5,11 @@
  */
 package view;
 
+import comportamiento.Mensajes;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import model.Constants;
@@ -16,18 +20,24 @@ import model.Constants;
  */
 public class VwMain extends javax.swing.JFrame {
 
-    public static int questionSelected;
+    private String[] characterPlayer = {};
+    private String[] characterIA = {};
+
+    public static int questionSelected = 0;
     public static String answer = "";
     public static String[] answers = new String[10];
 
-    private final JButton[] btnPersonArray = {
-        VwMain.btnPerson1, VwMain.btnPerson2, VwMain.btnPerson3, VwMain.btnPerson4, VwMain.btnPerson5,
-        VwMain.btnPerson6, VwMain.btnPerson7, VwMain.btnPerson8, VwMain.btnPerson9, VwMain.btnPerson10
-    };
+    public JButton[] btnPersonArray = {
+        VwMain.btnPerson1, VwMain.btnPerson2, VwMain.btnPerson3, 
+        VwMain.btnPerson4, VwMain.btnPerson5,
+        VwMain.btnPerson6, VwMain.btnPerson7, VwMain.btnPerson8, 
+        VwMain.btnPerson9, VwMain.btnPerson10};
 
-    private final JButton[] btnQuestionArray = {
-        VwMain.btnQuestion1, VwMain.btnQuestion2, VwMain.btnQuestion3, VwMain.btnQuestion4, VwMain.btnQuestion5,
-        VwMain.btnQuestion6, VwMain.btnQuestion7, VwMain.btnQuestion8, VwMain.btnQuestion9, VwMain.btnQuestion10
+    public JButton[] btnQuestionArray = {
+        btnQuestion1, btnQuestion2, btnQuestion3, 
+        btnQuestion4, btnQuestion5,
+        btnQuestion6, btnQuestion7, btnQuestion8, 
+        btnQuestion9, btnQuestion10
     };
 
     /** Creates new form VwMain */
@@ -35,11 +45,42 @@ public class VwMain extends javax.swing.JFrame {
         initComponents();
     }
 
-//    private void selectPerson(Person p) {
-//        tfPlayerCharacter.setText(p[0]);
-//    }
-    private void selectPerson(String[] person) {
-        tfPlayerCharacter.setText(person[0]);
+    public void selectPerson(String[] person) {
+        cbCharacterPlayer.setSelectedItem(person[0]);
+        characterPlayer = person;
+    }
+
+    public void saveSelection() {
+        for (int i = 0; i < Constants.PEOPLEARRAY.length; i++) {
+            if (Constants.PEOPLEARRAY[i][0].equals(cbCharacterPlayer.getSelectedItem())) {
+                System.out.println(Constants.PEOPLEARRAY[i][0] + " " + cbCharacterPlayer.getSelectedItem());
+                JButton temp = btnPersonArray[i];
+                temp.setEnabled(false);
+                System.out.println(temp.toString());
+            }
+        }
+        cbCharacterPlayer.setEnabled(false);
+    }
+
+    public void getIACharacter() {
+        int randomIndex;
+        do {
+            randomIndex = new Random().nextInt(Constants.PEOPLEARRAY.length);
+        } while (Constants.PEOPLEARRAY[randomIndex][0].equals(cbCharacterPlayer.getSelectedItem()));
+        cbCharacterIA.setSelectedItem(Constants.PEOPLEARRAY[randomIndex][0]);
+        characterIA = Constants.PEOPLEARRAY[randomIndex];
+    }
+
+    private void printCharacters() {
+        try {
+            System.out.println("Player: " + (characterPlayer[0]) + "\tIA: " + (characterIA[0]));
+        } catch (NullPointerException e) {
+            Mensajes.falla(this, "Selecciona un personaje");
+        }
+    }
+
+    private void guessIACharacter() {
+
     }
 
     private void selectQuestion(int selection) {
@@ -49,10 +90,81 @@ public class VwMain extends javax.swing.JFrame {
         question.setVisible(true);
     }
 
+    public void answer() {
+        switch (VwMain.questionSelected) {
+            case 1:
+                VwMain.answers[0] = answer;
+                VwMain.cbAnswers1.setSelectedItem(answer);
+//                VwMain.btnQuestion1.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected -1].setEnabled(false);
+                break;
+            case 2:
+                VwMain.answers[1] = answer;
+                VwMain.cbAnswers2.setSelectedItem(answer);
+//                VwMain.btnQuestion2.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+            case 3:
+                VwMain.answers[2] = answer;
+                VwMain.cbAnswers3.setSelectedItem(answer);
+//                VwMain.btnQuestion3.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+            case 4:
+                VwMain.answers[3] = answer;
+                VwMain.cbAnswers4.setSelectedItem(answer);
+//                VwMain.btnQuestion4.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+            case 5:
+                VwMain.answers[4] = answer;
+                VwMain.cbAnswers5.setSelectedItem(answer);
+//                VwMain.btnQuestion5.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+            case 6:
+                VwMain.answers[5] = answer;
+                VwMain.cbAnswers6.setSelectedItem(answer);
+//                VwMain.btnQuestion6.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+            case 7:
+                VwMain.answers[6] = answer;
+                VwMain.cbAnswers7.setSelectedItem(answer);
+//                VwMain.btnQuestion7.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+            case 8:
+                VwMain.answers[7] = answer;
+                VwMain.cbAnswers8.setSelectedItem(answer);
+//                VwMain.btnQuestion8.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+            case 9:
+                VwMain.answers[8] = answer;
+                VwMain.cbAnswers9.setSelectedItem(answer);
+//                VwMain.btnQuestion9.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+            case 10:
+                VwMain.answers[9] = answer;
+                VwMain.cbAnswers10.setSelectedItem(answer);
+//                VwMain.btnQuestion10.setEnabled(false);
+                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
+                break;
+        }
+        deactivate();
+    }
+
     public void deactivate() {
+        System.out.println("DEACTIVATING: ");
         for (int i = 0; i < Constants.PEOPLEARRAY.length; i++) {
-            if (!Constants.PEOPLEARRAY[i][questionSelected].equals(answer)) {
+            if ((!Constants.PEOPLEARRAY[i][questionSelected].equals(answer)) && btnPersonArray[i].isEnabled()) {
+                System.out.println("\t" + i + " "
+                        + Constants.PEOPLEARRAY[i][questionSelected] + " "
+                        + btnPersonArray[i].getText());
                 btnPersonArray[i].setEnabled(false);
+
             }
         }
     }
@@ -75,13 +187,12 @@ public class VwMain extends javax.swing.JFrame {
     }
 
     private void reset() {
-        for (int i = 0; i < btnPersonArray.length; i++) {
-            btnPersonArray[i].setEnabled(true);
-        }
-        for (int i = 0; i < btnQuestionArray.length; i++) {
-            btnQuestionArray[i].setEnabled(true);
-        }
-//        tfPlayerCharacter.setText("");
+//        for (int i = 0; i < btnPersonArray.length; i++) {
+//            btnPersonArray[i].setEnabled(true);
+//        }
+//        for (int i = 0; i < btnQuestionArray.length; i++) {
+//            btnQuestionArray[i].setEnabled(true);
+//        }
     }
 
     /** This method is called from within the constructor to
@@ -131,11 +242,13 @@ public class VwMain extends javax.swing.JFrame {
         pnOptions = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tfPlayerCharacter = new javax.swing.JTextField();
+        cbCharacterPlayer = new javax.swing.JComboBox<>();
         cbAnswer = new javax.swing.JComboBox<>();
         btnSelect = new javax.swing.JButton();
         btnGuess = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        cbCharacterIA = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -555,9 +668,14 @@ public class VwMain extends javax.swing.JFrame {
 
         jLabel3.setText("Respuesta:");
 
-        cbAnswer.setModel(new javax.swing.DefaultComboBoxModel(Constants.PEOPLE));
+        cbCharacterPlayer.setModel(new javax.swing.DefaultComboBoxModel(Constants.PEOPLE));
+        cbCharacterPlayer.setSelectedIndex(-1);
+        cbCharacterPlayer.setEnabled(false);
 
-        btnSelect.setText("Seleccionar personaje");
+        cbAnswer.setModel(new javax.swing.DefaultComboBoxModel(Constants.PEOPLE));
+        cbAnswer.setSelectedIndex(-1);
+
+        btnSelect.setText("Iniciar");
         btnSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectActionPerformed(evt);
@@ -578,6 +696,12 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
+        cbCharacterIA.setModel(new javax.swing.DefaultComboBoxModel(Constants.PEOPLE));
+        cbCharacterIA.setSelectedIndex(-1);
+        cbCharacterIA.setEnabled(false);
+
+        jLabel4.setText("IA:");
+
         javax.swing.GroupLayout pnOptionsLayout = new javax.swing.GroupLayout(pnOptions);
         pnOptions.setLayout(pnOptionsLayout);
         pnOptionsLayout.setHorizontalGroup(
@@ -588,31 +712,42 @@ public class VwMain extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfPlayerCharacter)
-                    .addComponent(cbAnswer, 0, 150, Short.MAX_VALUE))
+                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCharacterPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReset)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnOptionsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReset)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOptionsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbCharacterIA, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         pnOptionsLayout.setVerticalGroup(
             pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPlayerCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSelect)
                     .addComponent(jLabel2)
-                    .addComponent(btnReset))
+                    .addComponent(cbCharacterPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(cbCharacterIA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(btnGuess))
+                    .addComponent(btnGuess)
+                    .addComponent(btnReset))
                 .addContainerGap())
         );
 
@@ -695,14 +830,8 @@ public class VwMain extends javax.swing.JFrame {
         selectPerson(Constants.PERSON10);
     }//GEN-LAST:event_btnPerson10ActionPerformed
 
-    private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
-        disable(btnPerson1, btnPerson2, btnPerson3, btnPerson4, btnPerson5,
-                btnPerson6, btnPerson7, btnPerson8, btnPerson9, btnPerson10,
-                tfPlayerCharacter);
-    }//GEN-LAST:event_btnSelectActionPerformed
-
     private void btnGuessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuessActionPerformed
-        // TODO add your handling code here:
+        guessIACharacter();
     }//GEN-LAST:event_btnGuessActionPerformed
 
     private void btnQuestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion1ActionPerformed
@@ -749,6 +878,11 @@ public class VwMain extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_btnResetActionPerformed
 
+    private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
+        getIACharacter();
+        printCharacters();
+    }//GEN-LAST:event_btnSelectActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -786,16 +920,16 @@ public class VwMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuess;
-    private static javax.swing.JButton btnPerson1;
-    private static javax.swing.JButton btnPerson10;
-    private static javax.swing.JButton btnPerson2;
-    private static javax.swing.JButton btnPerson3;
-    private static javax.swing.JButton btnPerson4;
-    private static javax.swing.JButton btnPerson5;
-    private static javax.swing.JButton btnPerson6;
-    private static javax.swing.JButton btnPerson7;
-    private static javax.swing.JButton btnPerson8;
-    private static javax.swing.JButton btnPerson9;
+    public static javax.swing.JButton btnPerson1;
+    public static javax.swing.JButton btnPerson10;
+    public static javax.swing.JButton btnPerson2;
+    public static javax.swing.JButton btnPerson3;
+    public static javax.swing.JButton btnPerson4;
+    public static javax.swing.JButton btnPerson5;
+    public static javax.swing.JButton btnPerson6;
+    public static javax.swing.JButton btnPerson7;
+    public static javax.swing.JButton btnPerson8;
+    public static javax.swing.JButton btnPerson9;
     public static javax.swing.JButton btnQuestion1;
     public static javax.swing.JButton btnQuestion10;
     public static javax.swing.JButton btnQuestion2;
@@ -819,9 +953,12 @@ public class VwMain extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> cbAnswers7;
     public static javax.swing.JComboBox<String> cbAnswers8;
     public static javax.swing.JComboBox<String> cbAnswers9;
+    private javax.swing.JComboBox<String> cbCharacterIA;
+    private javax.swing.JComboBox<String> cbCharacterPlayer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -830,6 +967,5 @@ public class VwMain extends javax.swing.JFrame {
     private javax.swing.JPanel pnCharacters;
     private javax.swing.JPanel pnOptions;
     private javax.swing.JPanel pnQuestions;
-    private javax.swing.JTextField tfPlayerCharacter;
     // End of variables declaration//GEN-END:variables
 }
