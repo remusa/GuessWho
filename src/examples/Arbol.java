@@ -12,8 +12,6 @@ import static javafx.scene.input.KeyCode.T;
  * 
  * @author rms
  */
-
-
 public class Arbol {
 
 //    public Arbol izquierda;

@@ -6,10 +6,9 @@
 package view;
 
 import java.util.Arrays;
-import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import model.Person;
+import model.Constants;
 
 /**
  *
@@ -17,35 +16,47 @@ import model.Person;
  */
 public class VwMain extends javax.swing.JFrame {
 
-//    private Person person1 = new Person(1, "Juan", "Hombre", "", "Corto", "Cafés", "Negro", true, true, true);
-    private final Person person1 = new Person(1, "Rodo", "Hombre");
-    private final Person person2 = new Person(2, "Core", "Mujer");
-    private final Person person3 = new Person(3, "Héctor", "Hombre");
-    private final Person person4 = new Person(4, "Lupita", "Mujer");
-    private final Person person5 = new Person(5, "Diego", "Hombre");
-    private final Person person6 = new Person(6, "Miguel", "Hombre");
-    private final Person person7 = new Person(7, "Luis", "Hombre");
-    private final Person person8 = new Person(8, "Cecilia", "Mujer");
-    private final Person person9 = new Person(9, "Nacho", "Hombre");
-    private final Person person10 = new Person(10, "Gris", "Mujer");
-    
-    public static String answer1Sex = "";
-    
-    private final String[] peopleComboBox = {
-        person1.getName(), person2.getName(), person3.getName(), person4.getName(), person5.getName(),
-        person6.getName(), person7.getName(), person8.getName(), person9.getName(), person10.getName(),};
-    
-    private List<String> people2 = Arrays.asList(peopleComboBox);
+    public static int questionSelected;
+    public static String answer = "";
+    public static String[] answers = new String[10];
+
+    private final JButton[] btnPersonArray = {
+        VwMain.btnPerson1, VwMain.btnPerson2, VwMain.btnPerson3, VwMain.btnPerson4, VwMain.btnPerson5,
+        VwMain.btnPerson6, VwMain.btnPerson7, VwMain.btnPerson8, VwMain.btnPerson9, VwMain.btnPerson10
+    };
+
+    private final JButton[] btnQuestionArray = {
+        VwMain.btnQuestion1, VwMain.btnQuestion2, VwMain.btnQuestion3, VwMain.btnQuestion4, VwMain.btnQuestion5,
+        VwMain.btnQuestion6, VwMain.btnQuestion7, VwMain.btnQuestion8, VwMain.btnQuestion9, VwMain.btnQuestion10
+    };
 
     /** Creates new form VwMain */
     public VwMain() {
         initComponents();
     }
-    
-    private void selectPerson(Person p) {
-        tfPlayerCharacter.setText(p.getName());
+
+//    private void selectPerson(Person p) {
+//        tfPlayerCharacter.setText(p[0]);
+//    }
+    private void selectPerson(String[] person) {
+        tfPlayerCharacter.setText(person[0]);
     }
-    
+
+    private void selectQuestion(int selection) {
+        questionSelected = selection;
+        VwQuestion question = new VwQuestion();
+        question.setTitle("Pregunta " + questionSelected);
+        question.setVisible(true);
+    }
+
+    public void deactivate() {
+        for (int i = 0; i < Constants.PEOPLEARRAY.length; i++) {
+            if (!Constants.PEOPLEARRAY[i][questionSelected].equals(answer)) {
+                btnPersonArray[i].setEnabled(false);
+            }
+        }
+    }
+
     private void disable(Object... objs) {
         try {
             for (Object obj : objs) {
@@ -63,6 +74,16 @@ public class VwMain extends javax.swing.JFrame {
         }
     }
 
+    private void reset() {
+        for (int i = 0; i < btnPersonArray.length; i++) {
+            btnPersonArray[i].setEnabled(true);
+        }
+        for (int i = 0; i < btnQuestionArray.length; i++) {
+            btnQuestionArray[i].setEnabled(true);
+        }
+//        tfPlayerCharacter.setText("");
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -72,11 +93,30 @@ public class VwMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         pnQuestions = new javax.swing.JPanel();
-        btnQuestionSex = new javax.swing.JButton();
-        tfQSex = new javax.swing.JTextField();
+        btnQuestion1 = new javax.swing.JButton();
+        btnQuestion2 = new javax.swing.JButton();
+        btnQuestion3 = new javax.swing.JButton();
+        btnQuestion4 = new javax.swing.JButton();
+        btnQuestion5 = new javax.swing.JButton();
+        btnQuestion6 = new javax.swing.JButton();
+        btnQuestion7 = new javax.swing.JButton();
+        btnQuestion8 = new javax.swing.JButton();
+        btnQuestion9 = new javax.swing.JButton();
+        btnQuestion10 = new javax.swing.JButton();
+        cbAnswers1 = new javax.swing.JComboBox<>();
+        cbAnswers2 = new javax.swing.JComboBox<>();
+        cbAnswers3 = new javax.swing.JComboBox<>();
+        cbAnswers4 = new javax.swing.JComboBox<>();
+        cbAnswers5 = new javax.swing.JComboBox<>();
+        cbAnswers6 = new javax.swing.JComboBox<>();
+        cbAnswers7 = new javax.swing.JComboBox<>();
+        cbAnswers8 = new javax.swing.JComboBox<>();
+        cbAnswers9 = new javax.swing.JComboBox<>();
+        cbAnswers10 = new javax.swing.JComboBox<>();
         pnCharacters = new javax.swing.JPanel();
         btnPerson1 = new javax.swing.JButton();
         btnPerson2 = new javax.swing.JButton();
@@ -95,6 +135,7 @@ public class VwMain extends javax.swing.JFrame {
         cbAnswer = new javax.swing.JComboBox<>();
         btnSelect = new javax.swing.JButton();
         btnGuess = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -102,27 +143,143 @@ public class VwMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adivina Quién");
         setResizable(false);
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-            }
-        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setText("Adivina Quién");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Adivina quién");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         pnQuestions.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btnQuestionSex.setText("Sexo");
-        btnQuestionSex.addActionListener(new java.awt.event.ActionListener() {
+        btnQuestion1.setText(model.Constants.QUESTION1);
+        btnQuestion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuestionSexActionPerformed(evt);
+                btnQuestion1ActionPerformed(evt);
             }
         });
+
+        btnQuestion2.setText(model.Constants.QUESTION2);
+        btnQuestion2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion2ActionPerformed(evt);
+            }
+        });
+
+        btnQuestion3.setText(model.Constants.QUESTION3);
+        btnQuestion3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion3ActionPerformed(evt);
+            }
+        });
+
+        btnQuestion4.setText(model.Constants.QUESTION4);
+        btnQuestion4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion4ActionPerformed(evt);
+            }
+        });
+
+        btnQuestion5.setText(model.Constants.QUESTION5);
+        btnQuestion5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion5ActionPerformed(evt);
+            }
+        });
+
+        btnQuestion6.setText(model.Constants.QUESTION6);
+        btnQuestion6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion6ActionPerformed(evt);
+            }
+        });
+
+        btnQuestion7.setText(model.Constants.QUESTION7);
+        btnQuestion7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion7ActionPerformed(evt);
+            }
+        });
+
+        btnQuestion8.setText(model.Constants.QUESTION8);
+        btnQuestion8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion8ActionPerformed(evt);
+            }
+        });
+
+        btnQuestion9.setText(model.Constants.QUESTION9);
+        btnQuestion9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion9ActionPerformed(evt);
+            }
+        });
+
+        btnQuestion10.setText(model.Constants.QUESTION10);
+        btnQuestion10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuestion10ActionPerformed(evt);
+            }
+        });
+
+        cbAnswers1.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS1));
+        cbAnswers1.setSelectedIndex(-1);
+        cbAnswers1.setEnabled(false);
+
+        cbAnswers2.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS2));
+        cbAnswers2.setSelectedIndex(-1);
+        cbAnswers2.setEnabled(false);
+
+        cbAnswers3.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS3));
+        cbAnswers3.setSelectedIndex(-1);
+        cbAnswers3.setEnabled(false);
+
+        cbAnswers4.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS4));
+        cbAnswers4.setSelectedIndex(-1);
+        cbAnswers4.setEnabled(false);
+
+        cbAnswers5.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS5));
+        cbAnswers5.setSelectedIndex(-1);
+        cbAnswers5.setEnabled(false);
+
+        cbAnswers6.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS6));
+        cbAnswers6.setSelectedIndex(-1);
+        cbAnswers6.setEnabled(false);
+
+        cbAnswers7.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS7));
+        cbAnswers7.setSelectedIndex(-1);
+        cbAnswers7.setEnabled(false);
+
+        cbAnswers8.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS8));
+        cbAnswers8.setSelectedIndex(-1);
+        cbAnswers8.setEnabled(false);
+
+        cbAnswers9.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS9));
+        cbAnswers9.setSelectedIndex(-1);
+        cbAnswers9.setEnabled(false);
+
+        cbAnswers10.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS10));
+        cbAnswers10.setSelectedIndex(-1);
+        cbAnswers10.setEnabled(false);
 
         javax.swing.GroupLayout pnQuestionsLayout = new javax.swing.GroupLayout(pnQuestions);
         pnQuestions.setLayout(pnQuestionsLayout);
@@ -130,9 +287,47 @@ public class VwMain extends javax.swing.JFrame {
             pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnQuestionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnQuestionSex, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfQSex, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers1, 0, 130, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion10, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers10, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers7, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion8, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers8, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnQuestionsLayout.createSequentialGroup()
+                        .addComponent(btnQuestion9, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAnswers9, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnQuestionsLayout.setVerticalGroup(
@@ -140,14 +335,50 @@ public class VwMain extends javax.swing.JFrame {
             .addGroup(pnQuestionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnQuestionSex)
-                    .addComponent(tfQSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnQuestion1)
+                    .addComponent(cbAnswers1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion2)
+                    .addComponent(cbAnswers2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion3)
+                    .addComponent(cbAnswers3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion4)
+                    .addComponent(cbAnswers4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion5)
+                    .addComponent(cbAnswers5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion6)
+                    .addComponent(cbAnswers6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion7)
+                    .addComponent(cbAnswers7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion8)
+                    .addComponent(cbAnswers8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion9)
+                    .addComponent(cbAnswers9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnQuestionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuestion10)
+                    .addComponent(cbAnswers10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnCharacters.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btnPerson1.setText("Rodo");
+        btnPerson1.setText(Constants.PERSON1[0]);
         btnPerson1.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson1.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson1.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -157,7 +388,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson2.setText("Core");
+        btnPerson2.setText(Constants.PERSON2[0]);
         btnPerson2.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson2.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson2.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -167,7 +398,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson3.setText("Héctor");
+        btnPerson3.setText(Constants.PERSON3[0]);
         btnPerson3.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson3.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson3.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -177,7 +408,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson4.setText("Lupita");
+        btnPerson4.setText(Constants.PERSON4[0]);
         btnPerson4.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson4.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson4.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -187,7 +418,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson5.setText("Diego");
+        btnPerson5.setText(Constants.PERSON5[0]);
         btnPerson5.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson5.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson5.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -197,7 +428,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson6.setText("Miguel");
+        btnPerson6.setText(Constants.PERSON6[0]);
         btnPerson6.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson6.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson6.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -207,7 +438,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson7.setText("Luis");
+        btnPerson7.setText(Constants.PERSON7[0]);
         btnPerson7.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson7.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson7.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -217,7 +448,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson8.setText("Cecilia");
+        btnPerson8.setText(Constants.PERSON8[0]);
         btnPerson8.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson8.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson8.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -227,7 +458,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson9.setText("Nacho");
+        btnPerson9.setText(Constants.PERSON9[0]);
         btnPerson9.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson9.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson9.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -237,7 +468,7 @@ public class VwMain extends javax.swing.JFrame {
             }
         });
 
-        btnPerson10.setText("Gris");
+        btnPerson10.setText(Constants.PERSON10[0]);
         btnPerson10.setMaximumSize(new java.awt.Dimension(75, 75));
         btnPerson10.setMinimumSize(new java.awt.Dimension(75, 75));
         btnPerson10.setPreferredSize(new java.awt.Dimension(75, 75));
@@ -254,23 +485,22 @@ public class VwMain extends javax.swing.JFrame {
             .addGroup(pnCharactersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCharactersLayout.createSequentialGroup()
-                        .addComponent(btnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCharactersLayout.createSequentialGroup()
                         .addComponent(btnPerson5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPerson6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPerson7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPerson8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPerson6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCharactersLayout.createSequentialGroup()
+                        .addComponent(btnPerson8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPerson9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPerson10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -283,19 +513,19 @@ public class VwMain extends javax.swing.JFrame {
                 .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPerson2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPerson3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPerson5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPerson6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPerson7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPerson8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPerson4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnCharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPerson9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPerson10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnPerson10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -304,19 +534,19 @@ public class VwMain extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnCharacters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnCharacters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnQuestions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnCharacters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnQuestions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnOptions.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -325,7 +555,7 @@ public class VwMain extends javax.swing.JFrame {
 
         jLabel3.setText("Respuesta:");
 
-        cbAnswer.setModel(new javax.swing.DefaultComboBoxModel(peopleComboBox));
+        cbAnswer.setModel(new javax.swing.DefaultComboBoxModel(Constants.PEOPLE));
 
         btnSelect.setText("Seleccionar personaje");
         btnSelect.addActionListener(new java.awt.event.ActionListener() {
@@ -338,6 +568,13 @@ public class VwMain extends javax.swing.JFrame {
         btnGuess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuessActionPerformed(evt);
+            }
+        });
+
+        btnReset.setText("Reiniciar");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -358,6 +595,8 @@ public class VwMain extends javax.swing.JFrame {
                 .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReset)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnOptionsLayout.setVerticalGroup(
@@ -367,13 +606,14 @@ public class VwMain extends javax.swing.JFrame {
                 .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfPlayerCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSelect)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(btnReset))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(btnGuess))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jMenu1.setText("Ayuda");
@@ -392,23 +632,23 @@ public class VwMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnOptions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(275, 275, 275)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -416,43 +656,43 @@ public class VwMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPerson1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson1ActionPerformed
-        selectPerson(person1);
+        selectPerson(Constants.PERSON1);
     }//GEN-LAST:event_btnPerson1ActionPerformed
 
     private void btnPerson2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson2ActionPerformed
-        selectPerson(person2);
+        selectPerson(Constants.PERSON2);
     }//GEN-LAST:event_btnPerson2ActionPerformed
 
     private void btnPerson3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson3ActionPerformed
-        selectPerson(person3);
+        selectPerson(Constants.PERSON3);
     }//GEN-LAST:event_btnPerson3ActionPerformed
 
     private void btnPerson4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson4ActionPerformed
-        selectPerson(person4);
+        selectPerson(Constants.PERSON4);
     }//GEN-LAST:event_btnPerson4ActionPerformed
 
     private void btnPerson5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson5ActionPerformed
-        selectPerson(person5);
+        selectPerson(Constants.PERSON5);
     }//GEN-LAST:event_btnPerson5ActionPerformed
 
     private void btnPerson6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson6ActionPerformed
-        selectPerson(person6);
+        selectPerson(Constants.PERSON6);
     }//GEN-LAST:event_btnPerson6ActionPerformed
 
     private void btnPerson7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson7ActionPerformed
-        selectPerson(person7);
+        selectPerson(Constants.PERSON7);
     }//GEN-LAST:event_btnPerson7ActionPerformed
 
     private void btnPerson8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson8ActionPerformed
-        selectPerson(person8);
+        selectPerson(Constants.PERSON8);
     }//GEN-LAST:event_btnPerson8ActionPerformed
 
     private void btnPerson9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson9ActionPerformed
-        selectPerson(person9);
+        selectPerson(Constants.PERSON9);
     }//GEN-LAST:event_btnPerson9ActionPerformed
 
     private void btnPerson10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerson10ActionPerformed
-        selectPerson(person10);
+        selectPerson(Constants.PERSON10);
     }//GEN-LAST:event_btnPerson10ActionPerformed
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
@@ -465,17 +705,49 @@ public class VwMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuessActionPerformed
 
-    private void btnQuestionSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestionSexActionPerformed
-        new VwQSex().setVisible(true);
-    }//GEN-LAST:event_btnQuestionSexActionPerformed
+    private void btnQuestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion1ActionPerformed
+        selectQuestion(1);
+    }//GEN-LAST:event_btnQuestion1ActionPerformed
 
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        tfQSex.setText(answer1Sex);
-        
-        if (rootPaneCheckingEnabled) {
-            
-        }
-    }//GEN-LAST:event_formWindowGainedFocus
+    private void btnQuestion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion2ActionPerformed
+        selectQuestion(2);
+    }//GEN-LAST:event_btnQuestion2ActionPerformed
+
+    private void btnQuestion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion3ActionPerformed
+        selectQuestion(3);
+    }//GEN-LAST:event_btnQuestion3ActionPerformed
+
+    private void btnQuestion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion4ActionPerformed
+        selectQuestion(4);
+    }//GEN-LAST:event_btnQuestion4ActionPerformed
+
+    private void btnQuestion5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion5ActionPerformed
+        selectQuestion(5);
+    }//GEN-LAST:event_btnQuestion5ActionPerformed
+
+    private void btnQuestion6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion6ActionPerformed
+        selectQuestion(6);
+    }//GEN-LAST:event_btnQuestion6ActionPerformed
+
+    private void btnQuestion7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion7ActionPerformed
+        selectQuestion(7);
+    }//GEN-LAST:event_btnQuestion7ActionPerformed
+
+    private void btnQuestion8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion8ActionPerformed
+        selectQuestion(8);
+    }//GEN-LAST:event_btnQuestion8ActionPerformed
+
+    private void btnQuestion9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion9ActionPerformed
+        selectQuestion(9);
+    }//GEN-LAST:event_btnQuestion9ActionPerformed
+
+    private void btnQuestion10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestion10ActionPerformed
+        selectQuestion(10);
+    }//GEN-LAST:event_btnQuestion10ActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        reset();
+    }//GEN-LAST:event_btnResetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -514,30 +786,50 @@ public class VwMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuess;
-    private javax.swing.JButton btnPerson1;
-    private javax.swing.JButton btnPerson10;
-    private javax.swing.JButton btnPerson2;
-    private javax.swing.JButton btnPerson3;
-    private javax.swing.JButton btnPerson4;
-    private javax.swing.JButton btnPerson5;
-    private javax.swing.JButton btnPerson6;
-    private javax.swing.JButton btnPerson7;
-    private javax.swing.JButton btnPerson8;
-    private javax.swing.JButton btnPerson9;
-    private javax.swing.JButton btnQuestionSex;
+    private static javax.swing.JButton btnPerson1;
+    private static javax.swing.JButton btnPerson10;
+    private static javax.swing.JButton btnPerson2;
+    private static javax.swing.JButton btnPerson3;
+    private static javax.swing.JButton btnPerson4;
+    private static javax.swing.JButton btnPerson5;
+    private static javax.swing.JButton btnPerson6;
+    private static javax.swing.JButton btnPerson7;
+    private static javax.swing.JButton btnPerson8;
+    private static javax.swing.JButton btnPerson9;
+    public static javax.swing.JButton btnQuestion1;
+    public static javax.swing.JButton btnQuestion10;
+    public static javax.swing.JButton btnQuestion2;
+    public static javax.swing.JButton btnQuestion3;
+    public static javax.swing.JButton btnQuestion4;
+    public static javax.swing.JButton btnQuestion5;
+    public static javax.swing.JButton btnQuestion6;
+    public static javax.swing.JButton btnQuestion7;
+    public static javax.swing.JButton btnQuestion8;
+    public static javax.swing.JButton btnQuestion9;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSelect;
     private javax.swing.JComboBox<String> cbAnswer;
+    public static javax.swing.JComboBox<String> cbAnswers1;
+    public static javax.swing.JComboBox<String> cbAnswers10;
+    public static javax.swing.JComboBox<String> cbAnswers2;
+    public static javax.swing.JComboBox<String> cbAnswers3;
+    public static javax.swing.JComboBox<String> cbAnswers4;
+    public static javax.swing.JComboBox<String> cbAnswers5;
+    public static javax.swing.JComboBox<String> cbAnswers6;
+    public static javax.swing.JComboBox<String> cbAnswers7;
+    public static javax.swing.JComboBox<String> cbAnswers8;
+    public static javax.swing.JComboBox<String> cbAnswers9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pnCharacters;
     private javax.swing.JPanel pnOptions;
     private javax.swing.JPanel pnQuestions;
     private javax.swing.JTextField tfPlayerCharacter;
-    private javax.swing.JTextField tfQSex;
     // End of variables declaration//GEN-END:variables
 }
