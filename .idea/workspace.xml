@@ -2,9 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62600f46-1584-468b-bf47-d01d5ef2158c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/examples/Arbol.java" afterPath="$PROJECT_DIR$/src/examples/Arbol.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/examples/GuessingGame.java" afterPath="$PROJECT_DIR$/src/examples/GuessingGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/examples/GuessWho.class" afterPath="$PROJECT_DIR$/build/classes/examples/GuessWho.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/examples/GuessingGame.class" afterPath="$PROJECT_DIR$/build/classes/examples/GuessingGame.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/model/Constants.class" afterPath="$PROJECT_DIR$/build/classes/model/Constants.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$1.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$10.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$10.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$11.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$12.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$12.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$13.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$13.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$14.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$14.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$15.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$15.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$16.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$16.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$17.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$17.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$18.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$18.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$19.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$19.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$2.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$20.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$20.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$21.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$21.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$22.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$22.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$23.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$23.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$24.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$24.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$3.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$4.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$5.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$6.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$7.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$8.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain$9.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain$9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain.class" afterPath="$PROJECT_DIR$/build/classes/view/VwMain.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwQuestion$1.class" afterPath="$PROJECT_DIR$/build/classes/view/VwQuestion$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwQuestion$2.class" afterPath="$PROJECT_DIR$/build/classes/view/VwQuestion$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwQuestion$3.class" afterPath="$PROJECT_DIR$/build/classes/view/VwQuestion$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwQuestion.class" afterPath="$PROJECT_DIR$/build/classes/view/VwQuestion.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/built-jar.properties" afterPath="$PROJECT_DIR$/build/built-jar.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwMain.form" afterPath="$PROJECT_DIR$/build/classes/view/VwMain.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/view/VwQuestion.form" afterPath="$PROJECT_DIR$/build/classes/view/VwQuestion.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Constants.java" afterPath="$PROJECT_DIR$/src/model/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/VwMain.form" afterPath="$PROJECT_DIR$/src/view/VwMain.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/VwMain.java" afterPath="$PROJECT_DIR$/src/view/VwMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/VwQuestion.form" afterPath="$PROJECT_DIR$/src/view/VwQuestion.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/VwQuestion.java" afterPath="$PROJECT_DIR$/src/view/VwQuestion.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,7 +54,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Arbol.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/examples/Arbol.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -29,7 +68,7 @@
       <file leaf-file-name="GuessingGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/examples/GuessingGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
+            <state relative-caret-position="17">
               <caret line="59" column="49" lean-forward="false" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
               <folding />
             </state>
@@ -68,6 +107,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -114,9 +155,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -361,6 +400,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -457,28 +502,28 @@
     <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25718608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -495,6 +540,38 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/examples/Arbol.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/GuessingGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="59" column="49" lean-forward="false" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/Arbol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/GuessingGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="59" column="49" lean-forward="false" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/Arbol.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
@@ -503,7 +580,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/examples/GuessingGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
+        <state relative-caret-position="17">
           <caret line="59" column="49" lean-forward="false" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
           <folding />
         </state>

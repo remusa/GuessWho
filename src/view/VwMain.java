@@ -6,13 +6,13 @@
 package view;
 
 import comportamiento.Mensajes;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import model.Constants;
+import model.Game;
+import static model.Game.characterIA;
+import static model.Game.characterPlayer;
 
 /**
  *
@@ -20,24 +20,22 @@ import model.Constants;
  */
 public class VwMain extends javax.swing.JFrame {
 
-    private String[] characterPlayer = {};
-    private String[] characterIA = {};
-
     public static int questionSelected = 0;
     public static String answer = "";
-    public static String[] answers = new String[10];
+    public static String[] answersPlayer = new String[10];
 
-    public JButton[] btnPersonArray = {
-        VwMain.btnPerson1, VwMain.btnPerson2, VwMain.btnPerson3, 
+    public static JButton[] btnPersonArray = {
+        VwMain.btnPerson1, VwMain.btnPerson2, VwMain.btnPerson3,
         VwMain.btnPerson4, VwMain.btnPerson5,
-        VwMain.btnPerson6, VwMain.btnPerson7, VwMain.btnPerson8, 
-        VwMain.btnPerson9, VwMain.btnPerson10};
+        VwMain.btnPerson6, VwMain.btnPerson7, VwMain.btnPerson8,
+        VwMain.btnPerson9, VwMain.btnPerson10
+    };
 
-    public JButton[] btnQuestionArray = {
-        btnQuestion1, btnQuestion2, btnQuestion3, 
-        btnQuestion4, btnQuestion5,
-        btnQuestion6, btnQuestion7, btnQuestion8, 
-        btnQuestion9, btnQuestion10
+    public static JButton[] btnQuestionArray = {
+        VwMain.btnQuestion1, VwMain.btnQuestion2, VwMain.btnQuestion3,
+        VwMain.btnQuestion4, VwMain.btnQuestion5,
+        VwMain.btnQuestion6, VwMain.btnQuestion7, VwMain.btnQuestion8,
+        VwMain.btnQuestion9, VwMain.btnQuestion10
     };
 
     /** Creates new form VwMain */
@@ -46,8 +44,8 @@ public class VwMain extends javax.swing.JFrame {
     }
 
     public void selectPerson(String[] person) {
-        cbCharacterPlayer.setSelectedItem(person[0]);
-        characterPlayer = person;
+        cbAnswer.setSelectedItem(person[0]);
+        Game.characterPlayer = person;
     }
 
     public void saveSelection() {
@@ -76,6 +74,8 @@ public class VwMain extends javax.swing.JFrame {
             System.out.println("Player: " + (characterPlayer[0]) + "\tIA: " + (characterIA[0]));
         } catch (NullPointerException e) {
             Mensajes.falla(this, "Selecciona un personaje");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Mensajes.falla(this, "No se encontró personaje");
         }
     }
 
@@ -88,85 +88,6 @@ public class VwMain extends javax.swing.JFrame {
         VwQuestion question = new VwQuestion();
         question.setTitle("Pregunta " + questionSelected);
         question.setVisible(true);
-    }
-
-    public void answer() {
-        switch (VwMain.questionSelected) {
-            case 1:
-                VwMain.answers[0] = answer;
-                VwMain.cbAnswers1.setSelectedItem(answer);
-//                VwMain.btnQuestion1.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected -1].setEnabled(false);
-                break;
-            case 2:
-                VwMain.answers[1] = answer;
-                VwMain.cbAnswers2.setSelectedItem(answer);
-//                VwMain.btnQuestion2.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-            case 3:
-                VwMain.answers[2] = answer;
-                VwMain.cbAnswers3.setSelectedItem(answer);
-//                VwMain.btnQuestion3.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-            case 4:
-                VwMain.answers[3] = answer;
-                VwMain.cbAnswers4.setSelectedItem(answer);
-//                VwMain.btnQuestion4.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-            case 5:
-                VwMain.answers[4] = answer;
-                VwMain.cbAnswers5.setSelectedItem(answer);
-//                VwMain.btnQuestion5.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-            case 6:
-                VwMain.answers[5] = answer;
-                VwMain.cbAnswers6.setSelectedItem(answer);
-//                VwMain.btnQuestion6.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-            case 7:
-                VwMain.answers[6] = answer;
-                VwMain.cbAnswers7.setSelectedItem(answer);
-//                VwMain.btnQuestion7.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-            case 8:
-                VwMain.answers[7] = answer;
-                VwMain.cbAnswers8.setSelectedItem(answer);
-//                VwMain.btnQuestion8.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-            case 9:
-                VwMain.answers[8] = answer;
-                VwMain.cbAnswers9.setSelectedItem(answer);
-//                VwMain.btnQuestion9.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-            case 10:
-                VwMain.answers[9] = answer;
-                VwMain.cbAnswers10.setSelectedItem(answer);
-//                VwMain.btnQuestion10.setEnabled(false);
-                btnQuestionArray[VwMain.questionSelected - 1].setEnabled(false);
-                break;
-        }
-        deactivate();
-    }
-
-    public void deactivate() {
-        System.out.println("DEACTIVATING: ");
-        for (int i = 0; i < Constants.PEOPLEARRAY.length; i++) {
-            if ((!Constants.PEOPLEARRAY[i][questionSelected].equals(answer)) && btnPersonArray[i].isEnabled()) {
-                System.out.println("\t" + i + " "
-                        + Constants.PEOPLEARRAY[i][questionSelected] + " "
-                        + btnPersonArray[i].getText());
-                btnPersonArray[i].setEnabled(false);
-
-            }
-        }
     }
 
     private void disable(Object... objs) {
@@ -670,7 +591,6 @@ public class VwMain extends javax.swing.JFrame {
 
         cbCharacterPlayer.setModel(new javax.swing.DefaultComboBoxModel(Constants.PEOPLE));
         cbCharacterPlayer.setSelectedIndex(-1);
-        cbCharacterPlayer.setEnabled(false);
 
         cbAnswer.setModel(new javax.swing.DefaultComboBoxModel(Constants.PEOPLE));
         cbAnswer.setSelectedIndex(-1);
@@ -735,13 +655,14 @@ public class VwMain extends javax.swing.JFrame {
             pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSelect)
-                    .addComponent(jLabel2)
-                    .addComponent(cbCharacterPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(cbCharacterIA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbCharacterIA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSelect)
+                        .addComponent(jLabel2)
+                        .addComponent(cbCharacterPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

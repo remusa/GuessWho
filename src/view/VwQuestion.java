@@ -5,7 +5,11 @@
  */
 package view;
 
+import javax.swing.JButton;
 import model.Constants;
+import model.Game;
+import static view.VwMain.answer;
+import static view.VwMain.questionSelected;
 
 /**
  *
@@ -17,17 +21,98 @@ public class VwQuestion extends javax.swing.JFrame {
     public VwQuestion() {
         initComponents();
     }
+    
+    public static JButton[] btnPersonArray = {
+        VwMain.btnPerson1, VwMain.btnPerson2, VwMain.btnPerson3,
+        VwMain.btnPerson4, VwMain.btnPerson5,
+        VwMain.btnPerson6, VwMain.btnPerson7, VwMain.btnPerson8,
+        VwMain.btnPerson9, VwMain.btnPerson10
+    };
 
-    private void answer() {
-        VwMain.answer = "";
+    public void answer() {
         VwMain.answer = (String) cbAnswers.getSelectedItem();
-        
-        VwMain main = new VwMain();
-        main.answer();
+        switch (VwMain.questionSelected) {
+            case 1:
+                VwMain.answersPlayer[0] = answer;
+                VwMain.cbAnswers1.setSelectedItem(answer);
+                VwMain.btnQuestion1.setEnabled(false);
+                break;
+            case 2:
+                VwMain.answersPlayer[1] = answer;
+                VwMain.cbAnswers2.setSelectedItem(answer);
+                VwMain.btnQuestion2.setEnabled(false);
+                break;
+            case 3:
+                VwMain.answersPlayer[2] = answer;
+                VwMain.cbAnswers3.setSelectedItem(answer);
+                VwMain.btnQuestion3.setEnabled(false);
+                break;
+            case 4:
+                VwMain.answersPlayer[3] = answer;
+                VwMain.cbAnswers4.setSelectedItem(answer);
+                VwMain.btnQuestion4.setEnabled(false);
+                break;
+            case 5:
+                VwMain.answersPlayer[4] = answer;
+                VwMain.cbAnswers5.setSelectedItem(answer);
+                VwMain.btnQuestion5.setEnabled(false);
+                break;
+            case 6:
+                VwMain.answersPlayer[5] = answer;
+                VwMain.cbAnswers6.setSelectedItem(answer);
+                VwMain.btnQuestion6.setEnabled(false);
+                break;
+            case 7:
+                VwMain.answersPlayer[6] = answer;
+                VwMain.cbAnswers7.setSelectedItem(answer);
+                VwMain.btnQuestion7.setEnabled(false);
+                break;
+            case 8:
+                VwMain.answersPlayer[7] = answer;
+                VwMain.cbAnswers8.setSelectedItem(answer);
+                VwMain.btnQuestion8.setEnabled(false);
+                break;
+            case 9:
+                VwMain.answersPlayer[8] = answer;
+                VwMain.cbAnswers9.setSelectedItem(answer);
+                VwMain.btnQuestion9.setEnabled(false);
+                break;
+            case 10:
+                VwMain.answersPlayer[9] = answer;
+                VwMain.cbAnswers10.setSelectedItem(answer);
+                VwMain.btnQuestion10.setEnabled(false);
+                break;
+        }
+        deactivate();
         dispose();
     }
 
+    public void deactivate() {
+        System.out.println("DISABLING: ");
+        for (int i = 0; i < Constants.PEOPLEARRAY.length; i++) {
+            if ((!Constants.PEOPLEARRAY[i][questionSelected].equals(answer)) 
+                    && VwQuestion.btnPersonArray[i].isEnabled()
+                    ) {
+                System.out.println("\t" + i + " "
+                        + Constants.PEOPLEARRAY[i][questionSelected] + " "
+                        + VwQuestion.btnPersonArray[i].getText());
+                VwQuestion.btnPersonArray[i].setEnabled(false);
+            }
+        }
+    }
+
     private void loadQuestion() {
+        switch (Game.turn) {
+            case 1:
+                lbTurn.setText("Turno: IA");
+                break;
+            case 2:
+                lbTurn.setText("Turno: Jugador");
+                break;
+            default:
+                lbTurn.setText("Sin turno");
+        }
+        
         switch (VwMain.questionSelected) {
             case 1:
                 lbQuestion.setText(Constants.QUESTION1);
@@ -85,8 +170,10 @@ public class VwQuestion extends javax.swing.JFrame {
         lbQuestion = new javax.swing.JLabel();
         cbAnswers = new javax.swing.JComboBox<>();
         btnAnswer = new javax.swing.JButton();
+        lbTurn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -108,6 +195,10 @@ public class VwQuestion extends javax.swing.JFrame {
             }
         });
 
+        lbTurn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbTurn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTurn.setText("Turn");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,29 +206,33 @@ public class VwQuestion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(cbAnswers, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(81, 81, 81)
+                                .addComponent(btnAnswer))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addComponent(btnAnswer)))
-                        .addGap(0, 62, Short.MAX_VALUE)))
+                                .addGap(60, 60, 60)
+                                .addComponent(cbAnswers, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 64, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbTurn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbTurn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbQuestion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbAnswers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAnswer)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,5 +305,6 @@ public class VwQuestion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAnswers;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbQuestion;
+    private javax.swing.JLabel lbTurn;
     // End of variables declaration//GEN-END:variables
 }

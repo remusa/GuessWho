@@ -44,21 +44,23 @@ public class Constants {
 //    public static final Person PERSON9 = new Person(9, "Nacho", "Hombre");
 //    public static final Person PERSON10 = new Person(10, "Gris", "Mujer");
     
-    //    public static final String[] PEOPLE = {
+//    public static final String[] PEOPLE = {
 //        Constants.PERSON1.getName(), Constants.PERSON2.getName(), Constants.PERSON3.getName(), Constants.PERSON4.getName(), Constants.PERSON5.getName(),
 //        Constants.PERSON6.getName(), Constants.PERSON7.getName(), Constants.PERSON8.getName(), Constants.PERSON9.getName(), Constants.PERSON10.getName()
 //    };
     
-    public static final String[] PERSON1 = {"Rodo", "Hombre", "Moreno"};
-    public static final String[] PERSON2 = {"Core", "Hombre", "Negro"};
-    public static final String[] PERSON3 = {"Héctor", "Hombre", "Negro"};
-    public static final String[] PERSON4 = {"Lupita", "Mujer", "Blanco"};
-    public static final String[] PERSON5 = {"Diego", "Hombre", "Moreno"};
-    public static final String[] PERSON6 = {"Miguel", "Hombre", "Moreno"};
-    public static final String[] PERSON7 = {"Luis", "Hombre", "Negro"};
-    public static final String[] PERSON8 = {"Cecilia", "Mujer", "Moreno"};
-    public static final String[] PERSON9 = {"Nacho", "Hombre", "Blanco"};
-    public static final String[] PERSON10 = {"Gris", "Mujer", "Moreno"};
+//    public static final String[] PERSONX = {"Name", "Sex", "Skin color", "Hair length", "Eye color", 
+//  "Hair color", "Glasses", "Beard", "Moustache", "Height", "Alive"};
+    public static final String[] PERSON1 = {"Rodo",     "Hombre",   "Moreno",   "Corto",    "Azules"};
+    public static final String[] PERSON2 = {"Core",     "Hombre",   "Negro",    "Largo",    "Verdes"};
+    public static final String[] PERSON3 = {"Héctor",   "Hombre",   "Negro",    "Corto",    "Cafés"};
+    public static final String[] PERSON4 = {"Lupita",   "Mujer",    "Blanco",   "Largo",    "Grises"};
+    public static final String[] PERSON5 = {"Diego",    "Hombre",   "Moreno",   "Corto",    "Azules"};
+    public static final String[] PERSON6 = {"Miguel",   "Hombre",   "Moreno",   "Largo",    "Verdes"};
+    public static final String[] PERSON7 = {"Luis",     "Hombre",   "Negro",    "Corto",    "Cafés"};
+    public static final String[] PERSON8 = {"Cecilia",  "Mujer",    "Moreno",   "Largo",    "Grises"};
+    public static final String[] PERSON9 = {"Nacho",    "Hombre",   "Blanco",   "Corto",    "Azules"};
+    public static final String[] PERSON10 = {"Gris",    "Mujer",    "Moreno",   "Largo",    "Verdes"};
 
     public static final String[] PEOPLE = {
         PERSON1[0], Constants.PERSON2[0], Constants.PERSON3[0], Constants.PERSON4[0], Constants.PERSON5[0],
