@@ -61,12 +61,14 @@ public class VwMain extends javax.swing.JFrame {
     }
 
     public void getIACharacter() {
-        int randomIndex;
-        do {
-            randomIndex = new Random().nextInt(Constants.PEOPLEARRAY.length);
-        } while (Constants.PEOPLEARRAY[randomIndex][0].equals(cbCharacterPlayer.getSelectedItem()));
-        cbCharacterIA.setSelectedItem(Constants.PEOPLEARRAY[randomIndex][0]);
-        characterIA = Constants.PEOPLEARRAY[randomIndex];
+        if (cbCharacterPlayer.getSelectedIndex() != -1) {
+            int randomIndex;
+            do {
+                randomIndex = new Random().nextInt(Constants.PEOPLEARRAY.length);
+            } while (Constants.PEOPLEARRAY[randomIndex][0].equals(cbCharacterPlayer.getSelectedItem()));
+            cbCharacterIA.setSelectedItem(Constants.PEOPLEARRAY[randomIndex][0]);
+            characterIA = Constants.PEOPLEARRAY[randomIndex];
+        }
     }
 
     private void printCharacters() {
