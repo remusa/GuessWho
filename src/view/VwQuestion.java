@@ -5,9 +5,9 @@
  */
 package view;
 
+import interfaz.LookandFeel;
 import javax.swing.JButton;
 import model.Constants;
-import model.Game;
 import static view.VwMain.answer;
 import static view.VwMain.questionSelected;
 
@@ -17,20 +17,20 @@ import static view.VwMain.questionSelected;
  */
 public class VwQuestion extends javax.swing.JFrame {
 
-    /** Creates new form VwQSex */
-    public VwQuestion() {
-        initComponents();
-    }
-    
     public static JButton[] btnPersonArray = {
         VwMain.btnPerson1, VwMain.btnPerson2, VwMain.btnPerson3,
         VwMain.btnPerson4, VwMain.btnPerson5,
         VwMain.btnPerson6, VwMain.btnPerson7, VwMain.btnPerson8,
         VwMain.btnPerson9, VwMain.btnPerson10
     };
+    
+    /** Creates new form VwQSex */
+    public VwQuestion() {
+        initComponents();
+    }
 
     public void answer() {
-        VwMain.answer = (String) cbAnswers.getSelectedItem();
+        VwMain.answer = VwMain.characterIA[questionSelected];
         switch (VwMain.questionSelected) {
             case 1:
                 VwMain.answersPlayer[0] = answer;
@@ -83,76 +83,57 @@ public class VwQuestion extends javax.swing.JFrame {
                 VwMain.btnQuestion10.setEnabled(false);
                 break;
         }
+        VwMain.turnPlayer = false;
+        VwMain.turnCounter++;
         deactivate();
         dispose();
     }
 
-    public void deactivate() {
-        System.out.println("DISABLING: ");
+    private void deactivate() {
+        System.out.println("DISABLING (Player): ");
         for (int i = 0; i < Constants.PEOPLEARRAY.length; i++) {
             if ((!Constants.PEOPLEARRAY[i][questionSelected].equals(answer)) 
                     && VwQuestion.btnPersonArray[i].isEnabled()
                     ) {
-                System.out.println("\t" + i + " "
-                        + Constants.PEOPLEARRAY[i][questionSelected] + " "
-                        + VwQuestion.btnPersonArray[i].getText());
                 VwQuestion.btnPersonArray[i].setEnabled(false);
+                System.out.println("\t" + i + " " + Constants.PEOPLEARRAY[i][questionSelected] + " " + VwQuestion.btnPersonArray[i].getText());
             }
         }
     }
 
     private void loadQuestion() {
-        switch (Game.turn) {
-            case 1:
-                lbTurn.setText("Turno: IA");
-                break;
-            case 2:
-                lbTurn.setText("Turno: Jugador");
-                break;
-            default:
-                lbTurn.setText("Sin turno");
-        }
-        
+        lbTurn.setText("Turno: Jugador");
+
         switch (VwMain.questionSelected) {
             case 1:
                 lbQuestion.setText(Constants.QUESTION1);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS1));
                 break;
             case 2:
                 lbQuestion.setText(Constants.QUESTION2);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS2));
                 break;
             case 3:
                 lbQuestion.setText(Constants.QUESTION3);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS3));
                 break;
             case 4:
                 lbQuestion.setText(Constants.QUESTION4);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS4));
                 break;
             case 5:
                 lbQuestion.setText(Constants.QUESTION5);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS5));
                 break;
             case 6:
                 lbQuestion.setText(Constants.QUESTION6);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS6));
                 break;
             case 7:
                 lbQuestion.setText(Constants.QUESTION7);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS7));
                 break;
             case 8:
                 lbQuestion.setText(Constants.QUESTION8);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS8));
                 break;
             case 9:
                 lbQuestion.setText(Constants.QUESTION9);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS9));
                 break;
             case 10:
                 lbQuestion.setText(Constants.QUESTION10);
-                cbAnswers.setModel(new javax.swing.DefaultComboBoxModel(Constants.ANSWERS10));
                 break;
         }
     }
@@ -167,10 +148,10 @@ public class VwQuestion extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lbQuestion = new javax.swing.JLabel();
-        cbAnswers = new javax.swing.JComboBox<>();
-        btnAnswer = new javax.swing.JButton();
         lbTurn = new javax.swing.JLabel();
+        lbQuestion = new javax.swing.JLabel();
+        lbAnswer = new javax.swing.JLabel();
+        btnAnswer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -182,22 +163,24 @@ public class VwQuestion extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        lbTurn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbTurn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTurn.setText("Turn");
+
         lbQuestion.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lbQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbQuestion.setText("Question");
 
-        cbAnswers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lbAnswer.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbAnswer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbAnswer.setText(VwMain.characterIA[VwMain.questionSelected]);
 
-        btnAnswer.setText("Responder");
+        btnAnswer.setText("OK");
         btnAnswer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnswerActionPerformed(evt);
             }
         });
-
-        lbTurn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lbTurn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbTurn.setText("Turn");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -206,33 +189,28 @@ public class VwQuestion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(btnAnswer))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(cbAnswers, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 64, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbTurn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lbTurn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)))
+                    .addComponent(lbAnswer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(btnAnswer)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbTurn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbQuestion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbAnswers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(lbAnswer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAnswer)
-                .addGap(28, 28, 28))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,22 +251,24 @@ public class VwQuestion extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VwQuestion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VwQuestion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VwQuestion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VwQuestion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        LookandFeel lf = new LookandFeel();
+        lf.darculaLF();
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(VwQuestion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(VwQuestion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(VwQuestion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(VwQuestion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
         //</editor-fold>
 
@@ -302,8 +282,8 @@ public class VwQuestion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnswer;
-    private javax.swing.JComboBox<String> cbAnswers;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbAnswer;
     private javax.swing.JLabel lbQuestion;
     private javax.swing.JLabel lbTurn;
     // End of variables declaration//GEN-END:variables
